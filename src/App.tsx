@@ -7,35 +7,45 @@ const App: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const [userDetails, setUserDetails] = useState<string>("Unknown User");
 
-  const handleLogin = () => {
-    instance.loginRedirect(loginRequest);
+  const handleLogin = async () => {
+    try {
+      await instance.loginRedirect(loginRequest);
+      const accounts = instance.getAllAccounts();
+      console.log("accounts", accounts);
+      if (accounts.length > 0) {
+        instance.setActiveAccount(accounts[0]); // Set the first account as active
+        setUserDetails(accounts[0].username);
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   const handleLogout = () => {
     instance.logoutRedirect();
   };
 
-  useEffect(() => {
-    const initializeMsal = async () => {
-      try {
-        if (instance && isAuthenticated) {
-          const account = instance.getActiveAccount();
-          if (account) {
-            setUserDetails(account.username);
-          } else {
-            console.warn("No active account found.");
-            setUserDetails("Unknown User");
-          }
-        } else {
-          setUserDetails("Unknown User");
-        }
-      } catch (error) {
-        console.error("Error initializing MSAL instance:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const initializeMsal = async () => {
+  //     try {
+  //       if (instance && isAuthenticated) {
+  //         const account = instance.getActiveAccount();
+  //         if (account) {
+  //           setUserDetails(account.username);
+  //         } else {
+  //           console.warn("No active account found.");
+  //           setUserDetails("Unknown User");
+  //         }
+  //       } else {
+  //         setUserDetails("Unknown User");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error initializing MSAL instance:", error);
+  //     }
+  //   };
 
-    initializeMsal();
-  }, [isAuthenticated, instance]);
+  //   initializeMsal();
+  // }, [isAuthenticated, instance]);
 
   return (
     <div style={{ padding: "20px" }}>
