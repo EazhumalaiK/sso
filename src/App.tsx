@@ -16,10 +16,14 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (instance && isAuthenticated) {
       const account = instance.getActiveAccount();
-      console.log("account", account);
-      setUserDetails(account ? account.username : "Unknown User");
+      if (account) {
+        setUserDetails(account.username);
+      } else {
+        console.warn("No active account found.");
+        setUserDetails("Unknown User");
+      }
     } else {
       setUserDetails("Unknown User");
     }
@@ -34,7 +38,7 @@ const App: React.FC = () => {
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
-        <button onClick={handleLogin}>Login with Azure AD 2</button>
+        <button onClick={handleLogin}>Login with Azure AD 3</button>
       )}
     </div>
   );
