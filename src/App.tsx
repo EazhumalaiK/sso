@@ -8,6 +8,12 @@ const App: React.FC = () => {
   const [userDetails, setUserDetails] = useState<string>("Unknown User");
 
   useEffect(() => {
+    console.log(
+      "UseEffect Started:",
+      isAuthenticated,
+      "Current time:",
+      new Date().toLocaleTimeString()
+    );
     const initializeMsal = () => {
       const account = instance.getActiveAccount();
       console.log("Account:", account);
@@ -32,7 +38,12 @@ const App: React.FC = () => {
       }
     };
 
-    console.log("Is Authenticated:", isAuthenticated);
+    console.log(
+      "Is Authenticated:",
+      isAuthenticated,
+      "Current time:",
+      new Date().toLocaleTimeString()
+    );
     console.log("Instance:", instance);
     if (isAuthenticated) {
       initializeMsal();
