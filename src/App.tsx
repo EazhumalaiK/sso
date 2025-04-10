@@ -60,7 +60,7 @@ const App: React.FC = () => {
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
-        <button onClick={handleLogin}>Login with Azure AD</button>
+        <button onClick={handleLogin}>Login with Azure AD 8</button>
       )}
     </div>
   );
