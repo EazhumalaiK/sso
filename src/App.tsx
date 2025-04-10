@@ -1,6 +1,6 @@
 import React from "react";
 import { useMsal, useIsAuthenticated } from "@azure/msal-react";
-import { loginRequest } from "./AuthConfig";
+import { loginRequest } from "./authConfig";
 
 const App: React.FC = () => {
   const { instance } = useMsal();
