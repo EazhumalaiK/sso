@@ -16,17 +16,25 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    if (instance && isAuthenticated) {
-      const account = instance.getActiveAccount();
-      if (account) {
-        setUserDetails(account.username);
-      } else {
-        console.warn("No active account found.");
-        setUserDetails("Unknown User");
+    const initializeMsal = async () => {
+      try {
+        if (instance && isAuthenticated) {
+          const account = instance.getActiveAccount();
+          if (account) {
+            setUserDetails(account.username);
+          } else {
+            console.warn("No active account found.");
+            setUserDetails("Unknown User");
+          }
+        } else {
+          setUserDetails("Unknown User");
+        }
+      } catch (error) {
+        console.error("Error initializing MSAL instance:", error);
       }
-    } else {
-      setUserDetails("Unknown User");
-    }
+    };
+
+    initializeMsal();
   }, [isAuthenticated, instance]);
 
   return (
