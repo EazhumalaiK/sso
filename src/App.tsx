@@ -18,10 +18,7 @@ const App: React.FC = () => {
       console.log("Redirect URI:", window.location.href);
       console.log("MSAL Config:", instance.getConfiguration());
       console.log("MSAL Instance:", instance);
-      console.log(
-        "MSAL Instance ID:",
-        instance.getAllAccounts()[0]?.idTokenClaims?.tid
-      );
+
       if (account) {
         setUserDetails(account.username);
       } else {
@@ -35,6 +32,8 @@ const App: React.FC = () => {
       }
     };
 
+    console.log("Is Authenticated:", isAuthenticated);
+    console.log("Instance:", instance);
     if (isAuthenticated) {
       initializeMsal();
     }
