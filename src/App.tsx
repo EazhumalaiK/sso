@@ -17,10 +17,10 @@ const App: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   console.log("isAuthenticated line 18", isAuthenticated);
 
-  interface ProtectedRouteProps {
-    isAuthenticated: boolean;
-    children: React.ReactNode;
-  }
+  // interface ProtectedRouteProps {
+  //   isAuthenticated: boolean;
+  //   children: React.ReactNode;
+  // }
   console.log("isAuthenticated line 24", isAuthenticated);
 
   if (isAuthenticated === undefined) {
