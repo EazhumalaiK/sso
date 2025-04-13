@@ -49,14 +49,14 @@ const App: React.FC = () => {
         <Route path="/realestate" element={<RealEstate />} />
 
         {/* Protected Route */}
-        <Route
+        {/* <Route
           path="/"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Layout />
-            </ProtectedRoute>
-          }
-        />
+          element={ */}
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
+          <Layout />
+        </ProtectedRoute>
+        {/* }
+        /> */}
 
         {/* Fallback Route */}
         <Route path="*" element={<Navigate to="/login" replace />} />
