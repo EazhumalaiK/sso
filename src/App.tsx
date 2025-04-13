@@ -1,79 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { useMsal, useIsAuthenticated } from "@azure/msal-react";
-import { loginRequest } from "./authConfig";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useIsAuthenticated } from "@azure/msal-react";
+
+import Login from "./Login";
+import Layout from "./Layout";
+// import ProtectedRoute from "./ProtectedRoute"; // Importing the extracted ProtectedRoute component
 
 const App: React.FC = () => {
-  const { instance } = useMsal();
   const isAuthenticated = useIsAuthenticated();
-  const [userDetails, setUserDetails] = useState<string>("Unknown User");
 
-  useEffect(() => {
-    console.log(
-      "UseEffect Started:",
-      isAuthenticated,
-      "Current time:",
-      new Date().toLocaleTimeString()
-    );
-    const initializeMsal = () => {
-      const account = instance.getActiveAccount();
-      console.log("Account:", account);
-      console.log("All Accounts:", instance.getAllAccounts());
-      console.log("Is Authenticated:", isAuthenticated);
-      console.log("Instance:", instance);
-      console.log("Login Request:", loginRequest);
-      console.log("Redirect URI:", window.location.href);
-      console.log("MSAL Config:", instance.getConfiguration());
-      console.log("MSAL Instance:", instance);
+  interface ProtectedRouteProps {
+    isAuthenticated: boolean;
+    children: React.ReactNode;
+  }
 
-      if (account) {
-        setUserDetails(account.username);
-      } else {
-        const accounts = instance.getAllAccounts();
-        if (accounts.length > 0) {
-          instance.setActiveAccount(accounts[0]);
-          setUserDetails(accounts[0].username);
-        } else {
-          setUserDetails("Unknown User");
-        }
-      }
-    };
-
-    console.log(
-      "Is Authenticated:",
-      isAuthenticated,
-      "Current time:",
-      new Date().toLocaleTimeString()
-    );
-    console.log("Instance:", instance);
-    if (isAuthenticated) {
-      initializeMsal();
-    }
-  }, [isAuthenticated, instance]);
-
-  const handleLogin = async () => {
-    try {
-      await instance.loginRedirect(loginRequest);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  };
-
-  const handleLogout = () => {
-    instance.logoutRedirect();
+  const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+    isAuthenticated,
+    children,
+  }) => {
+    return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Azure AD SSO with React + TypeScript</h1>
-      {isAuthenticated ? (
-        <>
-          <p>You are logged in! {userDetails}</p>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      ) : (
-        <button onClick={handleLogin}>Login with Azure AD 8</button>
-      )}
-    </div>
+    <Router>
+      <Routes>
+        {/* Unprotected Route */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Protected Route */}
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Layout />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Fallback Route */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </Router>
   );
 };
 
