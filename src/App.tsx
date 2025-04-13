@@ -9,6 +9,8 @@ import { useIsAuthenticated } from "@azure/msal-react";
 
 import Login from "./Login";
 import Layout from "./Layout";
+import Bank from "./Bank";
+import RealEstate from "./RealEstate";
 // import ProtectedRoute from "./ProtectedRoute"; // Importing the extracted ProtectedRoute component
 
 const App: React.FC = () => {
@@ -31,6 +33,8 @@ const App: React.FC = () => {
       <Routes>
         {/* Unprotected Route */}
         <Route path="/login" element={<Login />} />
+        <Route path="/bank" element={<Bank />} />
+        <Route path="/realestate" element={<RealEstate />} />
 
         {/* Protected Route */}
         <Route
