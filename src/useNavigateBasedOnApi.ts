@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const useNavigateBasedOnApi = (username: string) => {
+  console.log("useNavigateBasedOnApi username line 6:", username); // Log the username for debugging
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("useNavigateBasedOnApi username:", username); // Log the username for debugging
+    console.log("useNavigateBasedOnApi username: line10", username); // Log the username for debugging
     // Check if username is not empty or undefined
     if (!username) {
       console.error("Username is empty or undefined. Skipping API call.");

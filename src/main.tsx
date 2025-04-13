@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { msalConfig } from "./authConfig.ts";
+import { BrowserRouter } from "react-router-dom";
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
@@ -25,7 +26,9 @@ msalInstance.initialize().then(() => {
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
       <MsalProvider instance={msalInstance}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </MsalProvider>
     </StrictMode>
   );
