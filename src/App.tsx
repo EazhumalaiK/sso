@@ -15,16 +15,22 @@ import RealEstate from "./RealEstate";
 
 const App: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
+  console.log("isAuthenticated", isAuthenticated);
 
   interface ProtectedRouteProps {
     isAuthenticated: boolean;
     children: React.ReactNode;
   }
 
+  if (isAuthenticated === undefined) {
+    return <div>Loading...</div>; // Show a loading indicator while determining auth state
+  }
+
   const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     isAuthenticated,
     children,
   }) => {
+    console.log("ProtectedRoute isAuthenticated:", isAuthenticated);
     return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
   };
 

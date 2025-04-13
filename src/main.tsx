@@ -7,6 +7,17 @@ import { PublicClientApplication } from "@azure/msal-browser";
 import { msalConfig } from "./authConfig.ts";
 
 const msalInstance = new PublicClientApplication(msalConfig);
+// Handle redirect promise
+msalInstance
+  .handleRedirectPromise()
+  .then((response) => {
+    if (response) {
+      console.log("Login successful:", response);
+    }
+  })
+  .catch((error) => {
+    console.error("Error during redirect handling:", error);
+  });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
