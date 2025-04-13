@@ -27,6 +27,14 @@ const App: React.FC = () => {
     console.log("isAuthenticated line 28", isAuthenticated);
     return <div>Loading...</div>; // Show a loading indicator while determining auth state
   }
+  if (isAuthenticated === true) {
+    console.log("isAuthenticated line 28", isAuthenticated);
+    return (
+      <div>
+        <Layout></Layout>
+      </div>
+    ); // Show a loading indicator while determining auth state
+  }
 
   console.log("isAuthenticated line 32", isAuthenticated);
 

@@ -8,9 +8,12 @@ import Header from "./Header";
 const Layout: React.FC = () => {
   const { accounts } = useMsal();
   const username = accounts.length > 0 ? accounts[0].username : "Guest";
+  console.log("username layout comp", username);
 
   // Use the custom hook
   useNavigateBasedOnApi(username);
+
+  console.log("Layout component rendered 16");
 
   // const handleLogout = () => {
   //   instance.logoutRedirect();

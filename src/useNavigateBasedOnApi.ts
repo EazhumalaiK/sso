@@ -5,7 +5,14 @@ const useNavigateBasedOnApi = (username: string) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("useNavigateBasedOnApi username:", username); // Log the username for debugging
+    // Check if username is not empty or undefined
+    if (!username) {
+      console.error("Username is empty or undefined. Skipping API call.");
+      return;
+    }
     const fetchData = async () => {
+      console.log("Fetching data for username:", username); // Log the username for debugging
       try {
         const url = `https://ssocheck100-sandbox.mxapps.io/rest/myservice/v1/accountsso/${username}`;
         // Replace with your API endpoint
