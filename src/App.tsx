@@ -30,13 +30,13 @@ const App: React.FC = () => {
 
   console.log("isAuthenticated line 32", isAuthenticated);
 
-  const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
-    isAuthenticated,
-    children,
-  }) => {
-    console.log("ProtectedRoute isAuthenticated:", isAuthenticated);
-    return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
-  };
+  // const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  //   isAuthenticated,
+  //   children,
+  // }) => {
+  //   console.log("ProtectedRoute isAuthenticated:", isAuthenticated);
+  //   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+  // };
 
   console.log("isAuthenticated line 42", isAuthenticated);
 
@@ -49,14 +49,12 @@ const App: React.FC = () => {
         <Route path="/realestate" element={<RealEstate />} />
 
         {/* Protected Route */}
-        {/* <Route
+        <Route
           path="/"
-          element={ */}
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Layout />
-        </ProtectedRoute>
-        {/* }
-        /> */}
+          element={
+            isAuthenticated ? <Layout /> : <Navigate to="/login" replace />
+          }
+        />
 
         {/* Fallback Route */}
         <Route path="*" element={<Navigate to="/login" replace />} />
