@@ -49,25 +49,23 @@ const App: React.FC = () => {
   console.log("isAuthenticated line 42", isAuthenticated);
 
   return (
-    <Router>
-      <Routes>
-        {/* Unprotected Route */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/bank" element={<Bank />} />
-        <Route path="/realestate" element={<RealEstate />} />
+    <Routes>
+      {/* Unprotected Route */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/bank" element={<Bank />} />
+      <Route path="/realestate" element={<RealEstate />} />
 
-        {/* Protected Route */}
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? <Layout /> : <Navigate to="/login" replace />
-          }
-        />
+      {/* Protected Route */}
+      <Route
+        path="/"
+        element={
+          isAuthenticated ? <Layout /> : <Navigate to="/login" replace />
+        }
+      />
 
-        {/* Fallback Route */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </Router>
+      {/* Fallback Route */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
   );
 };
 
