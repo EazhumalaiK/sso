@@ -20,7 +20,7 @@ const useNavigateBasedOnApi = (username: string) => {
         console.log("API URL:", url); // Log the URL for debugging
         console.log("Username:", username); // Log the username for debugging
         const response = await fetch(url, {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
