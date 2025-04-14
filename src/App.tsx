@@ -79,6 +79,9 @@ const App: React.FC = () => {
   if (isAuthenticated === undefined) {
     return <div>Loading...</div>;
   }
+  if (isAuthenticated === true) {
+    return <Layout></Layout>;
+  }
 
   return (
     <>
