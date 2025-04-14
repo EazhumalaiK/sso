@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from "react";
 import { useMsal } from "@azure/msal-react";
-import useNavigateBasedOnApi from "./useNavigateBasedOnApi";
+// import useNavigateBasedOnApi from "./useNavigateBasedOnApi";
 
 import Footer from "./Footer";
 import Header from "./Header";
