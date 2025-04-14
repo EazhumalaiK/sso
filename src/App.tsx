@@ -106,21 +106,22 @@ const App: React.FC = () => {
 
   return (
     <>
-      {showPopup && (
-        <div className="fixed">
-          <div className="popup-container">
-            <p className="popup-text">
-              You have been inactive for a while. Do you want to stay logged in?
-            </p>
-            <button className="popup-button" onClick={handlePopupClose}>
-              Stay Logged In
-            </button>
-          </div>
-        </div>
-      )}
       <Routes>
         {isAuthenticatedMemoized ? (
           <>
+            {showPopup && (
+              <div className="fixed">
+                <div className="popup-container">
+                  <p className="popup-text">
+                    You have been inactive for a while. Do you want to stay
+                    logged in?
+                  </p>
+                  <button className="popup-button" onClick={handlePopupClose}>
+                    Stay Logged In
+                  </button>
+                </div>
+              </div>
+            )}
             <SessionManager />
             <Route path="/" element={<Layout />}>
               <Route index element={<Bank />} />
