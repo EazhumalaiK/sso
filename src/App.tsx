@@ -86,6 +86,8 @@ const App: React.FC = () => {
   }
   if (isAuthenticatedMemoized === true) {
     console.log("Authenticated being called line 83");
+    console.log("isAuthenticated:", isAuthenticated);
+    console.log("isAuthenticatedMemoized:", isAuthenticatedMemoized);
     return <Layout></Layout>;
   }
 
