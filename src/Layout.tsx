@@ -16,7 +16,7 @@ const Layout: React.FC = memo(() => {
   console.log("username layout comp", username);
 
   // Use the custom hook
-  useNavigateBasedOnApi(username);
+  // useNavigateBasedOnApi(username);
 
   console.log("Layout component rendered 16");
 
@@ -27,9 +27,9 @@ const Layout: React.FC = memo(() => {
   return (
     <div>
       <Header />
-      {/* <main> */}
-      <Outlet />
-      {/* </main> */}
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );
