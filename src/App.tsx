@@ -5,16 +5,21 @@ import { InteractionRequiredAuthError } from "@azure/msal-browser";
 
 import Login from "./Login";
 import Layout from "./Layout";
-
+import { useMemo } from "react";
 import RealEstate from "./RealEstate";
 import Bank from "./Bank";
-const SESSION_TIMEOUT = 2 * 60 * 1000; // 15 minutes
+const SESSION_TIMEOUT = 3 * 60 * 1000; // 15 minutes
 const INACTIVITY_WARNING_TIME = 1 * 60 * 1000; // 5 minutes
+
 const App: React.FC = () => {
-  const isAuthenticated = useIsAuthenticated();
   const { instance, accounts } = useMsal();
   const [lastActivity, setLastActivity] = useState(Date.now());
   const [showPopup, setShowPopup] = useState(false);
+  const isAuthenticated = useIsAuthenticated();
+  const isAuthenticatedMemoized = useMemo(
+    () => isAuthenticated,
+    [isAuthenticated]
+  );
 
   useEffect(() => {
     const handleActivity = () => setLastActivity(Date.now());
@@ -45,7 +50,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const refreshToken = async () => {
-      if (isAuthenticated && accounts.length > 0) {
+      if (isAuthenticatedMemoized && accounts.length > 0) {
         try {
           const response = await instance.acquireTokenSilent({
             scopes: ["User.Read"], // Replace with your app's scopes
@@ -67,19 +72,19 @@ const App: React.FC = () => {
       }
     };
 
-    const interval = setInterval(refreshToken, 1 * 60 * 1000); // Refresh token every 5 minutes
+    const interval = setInterval(refreshToken, 2 * 60 * 1000); // Refresh token every 5 minutes
     return () => clearInterval(interval); // Cleanup on unmount
-  }, [isAuthenticated, accounts, instance]);
+  }, [isAuthenticatedMemoized, accounts, instance]);
 
   const handlePopupClose = () => {
     setShowPopup(false);
     setLastActivity(Date.now()); // Reset activity timer
   };
 
-  if (isAuthenticated === undefined) {
+  if (isAuthenticatedMemoized === undefined) {
     return <div>Loading...</div>;
   }
-  if (isAuthenticated === true) {
+  if (isAuthenticatedMemoized === true) {
     console.log("Authenticated being called line 83");
     return <Layout></Layout>;
   }
@@ -108,7 +113,11 @@ const App: React.FC = () => {
         <Route
           path="/"
           element={
-            isAuthenticated ? <Layout /> : <Navigate to="/login" replace />
+            isAuthenticatedMemoized ? (
+              <Layout />
+            ) : (
+              <Navigate to="/login" replace />
+            )
           }
         />
         <Route path="*" element={<Navigate to="/login" replace />} />
