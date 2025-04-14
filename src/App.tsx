@@ -7,6 +7,7 @@ import Login from "./Login";
 import Layout from "./Layout";
 import { useMemo } from "react";
 import RealEstate from "./RealEstate";
+import "./Popup.css";
 import Bank from "./Bank";
 const SESSION_TIMEOUT = 3 * 60 * 1000; // 3 minutes
 const REFRESH_TOKEN_TIME = 2 * 60 * 1000; // 2 minutes
@@ -95,35 +96,34 @@ const App: React.FC = () => {
   return (
     <>
       {showPopup && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full text-center">
-            <p className="text-gray-800 text-lg font-semibold mb-4">
+        <div className="fixed">
+          <div className="popup-container">
+            <p className="popup-text">
               You have been inactive for a while. Do you want to stay logged in?
             </p>
-            <button
-              onClick={handlePopupClose}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
+            <button className="popup-button" onClick={handlePopupClose}>
               Stay Logged In
             </button>
           </div>
         </div>
       )}
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/bank" element={<Bank />} />
-        <Route path="/realestate" element={<RealEstate />} />
-        <Route
-          path="/"
-          element={
-            isAuthenticatedMemoized ? (
-              <Layout />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/bank" element={<Bank />} />
+          <Route path="/realestate" element={<RealEstate />} />
+          {/* <Route
+            path="/"
+            element={
+              isAuthenticatedMemoized ? (
+                <Layout />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          /> */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Route>
       </Routes>
     </>
   );
