@@ -37,7 +37,8 @@ const useNavigateBasedOnApi = (username: string) => {
 
         const data = await response.json();
         console.log("API response data:", data); // Log the API response data
-
+        console.log("User ID:", data.userid); // Log the user ID for debugging
+        console.log("User ID type:", typeof data.userid, data.userid === 1); // Log the type of user ID for debugging
         if (data.userid === 1) {
           navigate("/bank"); // Navigate to 'bank' component
         } else {
@@ -51,7 +52,8 @@ const useNavigateBasedOnApi = (username: string) => {
     if (username) {
       fetchData();
     }
-  }, [username, navigate]);
+  }, []);
+  // }, [username, navigate]);
 };
 
 export default useNavigateBasedOnApi;
