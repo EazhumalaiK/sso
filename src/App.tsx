@@ -8,8 +8,9 @@ import Layout from "./Layout";
 import { useMemo } from "react";
 import RealEstate from "./RealEstate";
 import Bank from "./Bank";
-const SESSION_TIMEOUT = 3 * 60 * 1000; // 15 minutes
-const INACTIVITY_WARNING_TIME = 1 * 60 * 1000; // 5 minutes
+const SESSION_TIMEOUT = 3 * 60 * 1000; // 3 minutes
+const REFRESH_TOKEN_TIME = 2 * 60 * 1000; // 2 minutes
+const INACTIVITY_WARNING_TIME = 1 * 60 * 1000; // 1 minute
 
 const App: React.FC = () => {
   const { instance, accounts } = useMsal();
@@ -72,7 +73,7 @@ const App: React.FC = () => {
       }
     };
 
-    const interval = setInterval(refreshToken, 2 * 60 * 1000); // Refresh token every 5 minutes
+    const interval = setInterval(refreshToken, REFRESH_TOKEN_TIME); // Refresh token every 5 minutes
     return () => clearInterval(interval); // Cleanup on unmount
   }, [isAuthenticatedMemoized, accounts, instance]);
 
