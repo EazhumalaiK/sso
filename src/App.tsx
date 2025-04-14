@@ -108,7 +108,14 @@ const App: React.FC = () => {
         </div>
       )}
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Login />}>
+  <Route index element={<Bank />} /> // 👈 this is the fix
+  <Route path="login" element={<Login />} />
+  <Route path="bank" element={<Bank />} />
+  <Route path="realestate" element={<RealEstate />} />
+  <Route path="*" element={<Navigate to="/login" replace />} />
+</Route>
+        {/* <Route path="/" element={<Layout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/bank" element={<Bank />} />
           <Route path="/realestate" element={<RealEstate />} />
@@ -123,7 +130,7 @@ const App: React.FC = () => {
             }
           /> */}
           <Route path="*" element={<Navigate to="/login" replace />} />
-        </Route>
+        </Route> */}
       </Routes>
     </>
   );
