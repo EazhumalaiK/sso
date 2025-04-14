@@ -1,11 +1,11 @@
-import React, { useMemo } from "react";
+import React, { memo, useMemo } from "react";
 import { useMsal } from "@azure/msal-react";
 import useNavigateBasedOnApi from "./useNavigateBasedOnApi";
 
 import Footer from "./Footer";
 import Header from "./Header";
 
-const Layout: React.FC = () => {
+const Layout: React.FC = memo(() => {
   const { accounts } = useMsal();
   const username = useMemo(
     () => (accounts.length > 0 ? accounts[0].username : "Guest"),
@@ -30,6 +30,6 @@ const Layout: React.FC = () => {
       <Footer />
     </div>
   );
-};
+});
 
 export default Layout;
