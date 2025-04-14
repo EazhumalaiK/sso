@@ -39,7 +39,7 @@ const useNavigateBasedOnApi = (username: string) => {
         console.log("API response data:", data); // Log the API response data
         console.log("User ID:", data.userid); // Log the user ID for debugging
         console.log("User ID type:", typeof data.userid, data.userid === 1); // Log the type of user ID for debugging
-        if (data.userid === 1) {
+        if (data.userid === "1") {
           navigate("/bank"); // Navigate to 'bank' component
         } else {
           navigate("/realestate"); // Navigate to 'realestate' component
