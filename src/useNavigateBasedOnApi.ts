@@ -23,9 +23,13 @@ const useNavigateBasedOnApi = (username: string) => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            // Add any additional headers if required
+            // "Authorization": `Bearer ${token}`, // Example for adding an authorization token
+            accept: "application/json",
           },
           // body: JSON.stringify({ username }),
         });
+        console.log("Raw response:", response); // Log the raw response
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
