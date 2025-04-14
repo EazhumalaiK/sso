@@ -10,6 +10,7 @@ import RealEstate from "./RealEstate";
 import "./Popup.css";
 import Bank from "./Bank";
 import useNavigateBasedOnApi from "./useNavigateBasedOnApi";
+import SessionManager from "./SessionManager";
 const SESSION_TIMEOUT = 3 * 60 * 1000; // 3 minutes
 const REFRESH_TOKEN_TIME = 2 * 60 * 1000; // 2 minutes
 const INACTIVITY_WARNING_TIME = 1 * 60 * 1000; // 1 minute
@@ -119,12 +120,15 @@ const App: React.FC = () => {
       )}
       <Routes>
         {isAuthenticatedMemoized ? (
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Bank />} />
-            <Route path="bank" element={<Bank />} />
-            <Route path="realestate" element={<RealEstate />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
+          <>
+            <SessionManager />
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Bank />} />
+              <Route path="bank" element={<Bank />} />
+              <Route path="realestate" element={<RealEstate />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </>
         ) : (
           <>
             <Route path="/login" element={<Login />} />
