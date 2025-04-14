@@ -36,8 +36,9 @@ const useNavigateBasedOnApi = (username: string) => {
         }
 
         const data = await response.json();
+        console.log("API response data:", data); // Log the API response data
 
-        if (data === 1) {
+        if (data.userid === 1) {
           navigate("/bank"); // Navigate to 'bank' component
         } else {
           navigate("/realestate"); // Navigate to 'realestate' component
