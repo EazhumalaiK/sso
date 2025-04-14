@@ -27,9 +27,9 @@ const Layout: React.FC = memo(() => {
   return (
     <div>
       <Header />
-      <main>
-        <Outlet />
-      </main>
+      {/* <main> */}
+      <Outlet />
+      {/* </main> */}
       <Footer />
     </div>
   );

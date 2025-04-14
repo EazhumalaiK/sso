@@ -142,7 +142,7 @@ const App: React.FC = () => {
               )
             }
           // /> */}
-        // <Route path="*" element={<Navigate to="/login" replace />} />
+        {/* // <Route path="*" element={<Navigate to="/login" replace />} /> */}
         {/* </Route> */}
       </Routes>
     </>
