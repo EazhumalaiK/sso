@@ -9,6 +9,7 @@ import { useMemo } from "react";
 import RealEstate from "./RealEstate";
 import "./Popup.css";
 import Bank from "./Bank";
+import useNavigateBasedOnApi from "./useNavigateBasedOnApi";
 const SESSION_TIMEOUT = 3 * 60 * 1000; // 3 minutes
 const REFRESH_TOKEN_TIME = 2 * 60 * 1000; // 2 minutes
 const INACTIVITY_WARNING_TIME = 1 * 60 * 1000; // 1 minute
@@ -96,7 +97,10 @@ const App: React.FC = () => {
     console.log("Authenticated being called line 83");
     console.log("isAuthenticated:", isAuthenticated);
     console.log("isAuthenticatedMemoized:", isAuthenticatedMemoized);
-    return <Bank></Bank>;
+
+    // Call the useNavigateBasedOnApi hook
+    const username = accounts.length > 0 ? accounts[0].username : "Guest";
+    useNavigateBasedOnApi(username); // Pass the username to the hook
   }
 
   return (
