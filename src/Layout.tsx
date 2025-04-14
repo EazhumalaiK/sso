@@ -4,6 +4,7 @@ import useNavigateBasedOnApi from "./useNavigateBasedOnApi";
 
 import Footer from "./Footer";
 import Header from "./Header";
+import { Outlet } from "react-router-dom";
 
 const Layout: React.FC = memo(() => {
   const { accounts } = useMsal();
@@ -26,7 +27,9 @@ const Layout: React.FC = memo(() => {
   return (
     <div>
       <Header />
-      <main></main>
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );
