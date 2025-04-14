@@ -108,13 +108,26 @@ const App: React.FC = () => {
         </div>
       )}
       <Routes>
-        <Route path="/" element={<Login />}>
+        {isAuthenticatedMemoized ? (
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Bank />} />
+          <Route path="bank" element={<Bank />} />
+          <Route path="realestate" element={<RealEstate />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      ) : (
+        <>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </>
+      )}
+        {/* <Route path="/" element={<Login />}>
   <Route index element={<Bank />} /> // 👈 this is the fix
   <Route path="login" element={<Login />} />
   <Route path="bank" element={<Bank />} />
   <Route path="realestate" element={<RealEstate />} />
   <Route path="*" element={<Navigate to="/login" replace />} />
-</Route>
+</Route> */}
         {/* <Route path="/" element={<Layout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/bank" element={<Bank />} />
