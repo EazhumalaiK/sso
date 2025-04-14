@@ -80,6 +80,7 @@ const App: React.FC = () => {
     return <div>Loading...</div>;
   }
   if (isAuthenticated === true) {
+    console.log("Authenticated being called line 83");
     return <Layout></Layout>;
   }
 

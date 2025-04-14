@@ -52,7 +52,7 @@ const useNavigateBasedOnApi = (username: string) => {
     if (username) {
       fetchData();
     }
-  }, []);
+  }, [username]); // Add username and navigate to the dependency array
   // }, [username, navigate]);
 };
 
