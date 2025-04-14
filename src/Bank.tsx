@@ -67,7 +67,7 @@ const Bank = () => {
     };
 
     fetchData();
-  }, [username, navigate]);
+  }, []);
 
   return (
     <div>
