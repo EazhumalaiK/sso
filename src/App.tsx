@@ -5,8 +5,9 @@ import { InteractionRequiredAuthError } from "@azure/msal-browser";
 
 import Login from "./Login";
 import Layout from "./Layout";
-import Bank from "./Bank";
+
 import RealEstate from "./RealEstate";
+import Bank from "./Bank";
 const SESSION_TIMEOUT = 2 * 60 * 1000; // 15 minutes
 const INACTIVITY_WARNING_TIME = 1 * 60 * 1000; // 5 minutes
 const App: React.FC = () => {
